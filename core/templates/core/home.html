@@ -1,0 +1,21 @@
+<!-- core/templates/core/home.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+</head>
+<body>
+    <h2>Добро пожаловать на сайт компании!</h2>
+    <p>Это главная страница вашего B2B-сайта.</p>
+    {% if user.is_authenticated %}
+        <p>Вы вошли как: {{ user.username }}</p>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Выйти</button>
+        </form>
+    {% else %}
+        <p><a href="{% url 'login' %}">Войти</a> | <a href="{% url 'register' %}">Регистрация</a></p>
+    {% endif %}
+</body>
+</html>
